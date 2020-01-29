@@ -339,6 +339,20 @@ fn ser_de_variant_tuple() {
 }
 
 #[test]
+fn ser_de_field_vec_tuple() {
+    #[derive(Deserialize, Serialize, Eq, PartialEq, Debug)]
+    struct Foo {
+        bar: Vec<(u16,)>,
+    }
+
+    let foo = Foo {
+        bar: vec![(1,), (3,)],
+    };
+
+    test_ser_de_eq(foo);
+}
+
+#[test]
 fn ser_de_variant_struct() {
     #[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
     enum Mock {
